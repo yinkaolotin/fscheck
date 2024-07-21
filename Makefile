@@ -6,7 +6,7 @@ OBJS = $(SRCS:.c=.o)
 MAIN = main.c
 TARGET = fscheck
 
-TEST_SRCS = tests/test_f.c tests/unity/unity.c
+TEST_SRCS = tests/test_parser.c tests/unity/unity.c
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 TEST_TARGET = run_tests
 
