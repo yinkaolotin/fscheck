@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -I./include -Wall -Wextra
 
-SRCS = src/f/f.c main.c
+SRCS = src/parser/parser.c main.c
 OBJS = $(SRCS:.c=.o)
 TARGET = fscheck
 
