@@ -1,6 +1,8 @@
 #ifndef EXCEPTION_EXCEPTION_H
 #define EXCEPTION_EXCEPTION_H
 
+#include <stdlib.h>
+
 
 #define USAGE_EXCEPTION "Usage: %s <starting-directory>\n"
 #define PARSE_EXCEPTION "failed to parse commmand arguments\n"
@@ -19,5 +21,6 @@
         fprintf(stderr, fmt, ##__VA_ARGS__); \
         return value; \
     } while (0)
+
 
 #endif
