@@ -1,12 +1,14 @@
 CC = gcc
 CFLAGS = -I./include -I./tests/unity -Wall -Wextra
 
-SRCS = src/parser/parser.c main.c
+
+SRCS = src/parser/parser.c src/info/info.c main.c
 OBJS = $(SRCS:.c=.o)
 MAIN = main.c
 TARGET = fscheck
 
-TEST_SRCS = tests/test_parser.c tests/unity/unity.c
+
+TEST_SRCS = tests/test_parser.c tests/test_info.c tests/unity/unity.c
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 TEST_TARGET = run_tests
 
