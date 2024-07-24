@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
+#include <unistd.h>
 #include "parser/parser.h"
 #include "exception/exception.h"
 
@@ -19,5 +19,16 @@ const struct cmd *parse_cmd(int argc, char *argv[])
         EXCEPTION_AND_EXIT(PARSE_EXCEPTION);
     }
     c->directory = strdup(argv[1]);
+
+    int opt;
+    while((opt = getopt(argc, argv, EXPECTED_OPTS_FMT)) != -1) {
+        switch(opt) {
+        case OPT_AGGREGATE:
+            c->flags |= FLAG_AGGREGATE_INFO;
+            printf("displaying aggregate information....\n");
+            return c;
+        case OPTS_UNKNOWN: EXCEPTION_AND_EXIT("Usage: %s <directory> [-a]\n", argv[0]);
+        }
+    }
     return c;
 }
