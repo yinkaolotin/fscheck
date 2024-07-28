@@ -25,8 +25,10 @@ const struct cmd *parse_cmd(int argc, char *argv[])
         switch(opt) {
         case OPT_AGGREGATE:
             c->flags |= FLAG_AGGREGATE_INFO;
-            printf("displaying aggregate information....\n");
-            return c;
+            break;
+        case OPT_STATISTICS:
+            c->flags |= FLAG_SHOW_STATISTICS;
+            break;
         case OPTS_UNKNOWN: EXCEPTION_AND_EXIT("Usage: %s <directory> [-a]\n", argv[0]);
         }
     }

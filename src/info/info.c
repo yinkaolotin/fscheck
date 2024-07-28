@@ -8,7 +8,19 @@
 #include "exception/exception.h"
 
 static int file_count = 0;
+
 static FileMeta file_meta_storage[MAX_FILES_READABLE];
+static DirectoryStats directory_stats_storage[MAX_FILES_READABLE];
+static FileTypeStats file_type_stats_storage[MAX_FILE_TYPES] = {
+    {"d", 0, 0},
+    {"dnr", 0, 0},
+    {"dp", 0, 0},
+    {"f", 0, 0},
+    {"ns", 0, 0},
+    {"sl", 0, 0},
+    {"sln", 0, 0},
+    {"???", 0, 0},
+};
 
 const char *get_file_type(int file_type)
 {
@@ -51,6 +63,15 @@ int scrape_file_meta(const char *full_path,
     fm->accessed_time = stat_buf->st_atime;
     fm->modified_time = stat_buf->st_mtime;
     fm->changed_time = stat_buf->st_ctime;
+
+    size_t i = 0;
+    while(i < MAX_FILE_TYPES) {
+        if (strcmp(file_type_stats_storage[i].type, fm->type) == 0) {
+            file_type_stats_storage[i].count += 1;
+            file_type_stats_storage[i].total_size += fm->size;
+        }
+        i++;
+    }
 
     return 0;
 }

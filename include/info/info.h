@@ -14,6 +14,7 @@
 
 #define MAX_PATH_LENGTH 100
 #define MAX_FILES_READABLE 10000
+#define MAX_FILE_TYPES 10
 
 #include <ftw.h>
 #include <time.h>
@@ -38,6 +39,18 @@ typedef struct {
     time_t changed_time;
 } FileMeta;
 
+typedef struct {
+    char *type;
+    int count;
+    off_t total_size;
+} FileTypeStats;
+
+typedef struct {
+    char path[MAX_PATH_LENGTH];
+    int file_count;
+    off_t total_size;
+} DirectoryStats;
+
 const char *get_file_type(int file_type);
 
 int scrape_file_meta(const char *full_path,
@@ -48,6 +61,8 @@ int scrape_file_meta(const char *full_path,
 void print_default_mode();
 
 void print_aggregate_mode();
+
+void print_stats_mode();
 
 void print_file_meta();
 
